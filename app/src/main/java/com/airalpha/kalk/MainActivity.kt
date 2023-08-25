@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.airalpha.kalk.presentation.CalculatorScreen
 import com.airalpha.kalk.ui.theme.KalkTheme
 
 class MainActivity : ComponentActivity() {
@@ -18,29 +19,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             KalkTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
+                CalculatorScreen()
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "2864,435",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    KalkTheme {
-        Greeting("Android")
     }
 }

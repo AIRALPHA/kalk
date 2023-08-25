@@ -24,28 +24,28 @@ val fontFamily = FontFamily(
 
 // Set of Material typography styles to start with
 val Typography = Typography(
-    bodyLarge = TextStyle(
+    titleLarge = TextStyle(
         fontFamily = fontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 64.sp,
         lineHeight = 40.sp,
         letterSpacing = 0.sp
     ),
-    bodyMedium = TextStyle(
+    titleMedium = TextStyle(
         fontFamily = fontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 40.sp,
         lineHeight = 56.sp,
         letterSpacing = 0.sp
     ),
-    bodySmall = TextStyle(
+    titleSmall = TextStyle(
         fontFamily = fontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 28.sp,
         lineHeight = 40.sp,
         letterSpacing = 0.sp
     ),
-    titleMedium = TextStyle(
+    bodyMedium = TextStyle(
         fontFamily = fontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
@@ -55,7 +55,7 @@ val Typography = Typography(
     labelMedium = TextStyle(
         fontFamily = fontFamily,
         fontWeight = FontWeight.Light,
-        fontSize = 20.sp,
+        fontSize = 24.sp,
         lineHeight = 16.sp,
         letterSpacing = 0.5.sp
     ),
