@@ -8,6 +8,7 @@ import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Shapes
@@ -15,8 +16,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.airalpha.kalk.R
 import com.airalpha.kalk.domain.models.Position
 import com.airalpha.kalk.presentation.utilis.getShapeByPosition
 
@@ -26,6 +29,7 @@ fun FnButton(
     text: String,
     position: Position = Position(),
     showPrimaryColor: Boolean = true,
+    size: Double = 1.0
 ) {
     val screenWidth = LocalConfiguration.current.screenWidthDp.minus(16 * 2)
     Button(
@@ -39,7 +43,7 @@ fun FnButton(
         shape = getShapeByPosition(position),
         modifier = modifier
             .height(72.dp)
-            .width(screenWidth.dp / 4)
+            .width((screenWidth / (4 / size)).dp)
             .then(
                 when {
                     position.first && position.last.not() -> Modifier.padding(end = 4.dp)
@@ -48,9 +52,19 @@ fun FnButton(
                 }
             )
     ) {
-        Text(
-            text = text,
-            style = MaterialTheme.typography.labelMedium
-        )
+        when(text) {
+            "clear" -> Icon(
+                painter = painterResource(id = R.drawable.clear_input),
+                contentDescription = "clear"
+            )
+            "switch" -> Icon(
+                painter = painterResource(id = R.drawable.swicth_units),
+                contentDescription = "switch"
+            )
+            else -> Text(
+                text = text,
+                style = MaterialTheme.typography.labelMedium
+            )
+        }
     }
 }

@@ -23,7 +23,7 @@ fun NbButton(
     modifier: Modifier = Modifier,
     text: String,
     position: Position = Position(),
-    size: Int = 1,
+    size: Double = 1.0,
 ) {
     val screenWidth = LocalConfiguration.current.screenWidthDp.minus(16 * 2)
     Button(
@@ -33,7 +33,7 @@ fun NbButton(
             contentColor = MaterialTheme.colorScheme.onBackground
         ),
         shape = getShapeByPosition(position),
-        modifier = modifier.height(72.dp).width(screenWidth.dp / (4 / size)).then(
+        modifier = modifier.height(72.dp).width((screenWidth / (4 / size)).dp).then(
             when {
                 position.first && position.last.not() -> Modifier.padding(end = 4.dp)
                 position.last -> Modifier

@@ -229,7 +229,7 @@ fun CalculatorScreen() {
                         .padding(horizontal = 16.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    NbButton(text = "0", position = Position(first = true, bottom = true), size = 2)
+                    NbButton(text = "0", position = Position(first = true, bottom = true), size = 2.0)
                     NbButton(text = ".")
                     FnButton(text = "=", position = Position(last = true, bottom = true))
                 }
