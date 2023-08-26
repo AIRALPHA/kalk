@@ -69,249 +69,209 @@ import com.airalpha.kalk.presentation.components.NbButton
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ConverterScreen() {
-    var selectedIndex by remember { mutableStateOf(0) }
-
-    val list = listOf("Calculator", "Converter")
-
     val context = LocalContext.current
     val meters = arrayOf("Length", "Other")
     var expanded by remember { mutableStateOf(false) }
     var selectedText by remember { mutableStateOf(meters[0]) }
 
-    Scaffold(
+    Row(
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Surface(modifier = Modifier.padding(it), color = MaterialTheme.colorScheme.background) {
-            Column {
-                TabRow(
-                    selectedTabIndex = selectedIndex,
-                    containerColor = MaterialTheme.colorScheme.onBackground.copy(.1f),
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .clip(ShapeDefaults.ExtraSmall),
-                    indicator = {},
-                    divider = {}
-                ) {
-                    list.forEachIndexed { index, s ->
-                        val selected = selectedIndex == index
-                        Tab(
-                            modifier = if (selected) Modifier
-                                .background(MaterialTheme.colorScheme.primaryContainer)
-                            else Modifier,
-                            selected = selected,
-                            onClick = { selectedIndex = index },
-                            text = {
-                                Text(
-                                    text = s,
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    fontWeight = FontWeight.Bold,
-                                    color = if (selected) MaterialTheme.colorScheme.onPrimaryContainer
-                                    else MaterialTheme.colorScheme.onBackground
-                                )
-                            }
-                        )
-                    }
-                }
-                Row(
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    ExposedDropdownMenuBox(
-                        expanded = expanded,
-                        onExpandedChange = {
-                            expanded = !expanded
-                        }
-                    ) {
-                        Row(modifier = Modifier.menuAnchor()) {
-                            Text(selectedText, style = MaterialTheme.typography.labelSmall)
-                            ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-                        }
+        ExposedDropdownMenuBox(
+            expanded = expanded,
+            onExpandedChange = {
+                expanded = !expanded
+            }
+        ) {
+            Row(modifier = Modifier.menuAnchor()) {
+                Text(selectedText, style = MaterialTheme.typography.labelSmall)
+                ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
+            }
 
-                        ExposedDropdownMenu(
-                            expanded = expanded,
-                            onDismissRequest = { expanded = false }
-                        ) {
-                            meters.forEach { item ->
-                                DropdownMenuItem(
-                                    text = { Text(text = item) },
-                                    onClick = {
-                                        selectedText = item
-                                        expanded = false
-                                        Toast.makeText(context, item, Toast.LENGTH_SHORT).show()
-                                    }
-                                )
-                            }
+            ExposedDropdownMenu(
+                expanded = expanded,
+                onDismissRequest = { expanded = false }
+            ) {
+                meters.forEach { item ->
+                    DropdownMenuItem(
+                        text = { Text(text = item) },
+                        onClick = {
+                            selectedText = item
+                            expanded = false
+                            Toast.makeText(context, item, Toast.LENGTH_SHORT).show()
                         }
-                    }
-                }
-                Row(
-                    modifier = Modifier
-                        .padding(18.dp)
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    TextField(
-                        value = "SDS",
-                        onValueChange = {},
-                        colors = TextFieldDefaults.textFieldColors(
-                            unfocusedLabelColor = MaterialTheme.colorScheme.background,
-                            focusedLabelColor = MaterialTheme.colorScheme.background,
-                            containerColor = MaterialTheme.colorScheme.background,
-                            focusedIndicatorColor = MaterialTheme.colorScheme.onBackground,
-                            unfocusedIndicatorColor = MaterialTheme.colorScheme.onBackground,
-                            cursorColor = MaterialTheme.colorScheme.onBackground,
-                            textColor = MaterialTheme.colorScheme.onBackground,
-                        )
-                    )
-                    ExposedDropdownMenuBox(
-                        expanded = expanded,
-                        onExpandedChange = {
-                            expanded = !expanded
-                        }
-                    ) {
-                        Row(modifier = Modifier.menuAnchor()) {
-                            Text("ft", style = MaterialTheme.typography.labelSmall)
-                            ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-                        }
-
-                        ExposedDropdownMenu(
-                            expanded = expanded,
-                            onDismissRequest = { expanded = false }
-                        ) {
-                            meters.forEach { item ->
-                                DropdownMenuItem(
-                                    text = { Text(text = item) },
-                                    onClick = {
-                                        selectedText = item
-                                        expanded = false
-                                        Toast.makeText(context, item, Toast.LENGTH_SHORT).show()
-                                    }
-                                )
-                            }
-                        }
-                    }
-                }
-                Row(
-                    modifier = Modifier
-                        .padding(18.dp)
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    TextField(
-                        value = "SDS",
-                        onValueChange = {},
-                        colors = TextFieldDefaults.textFieldColors(
-                            unfocusedLabelColor = MaterialTheme.colorScheme.background,
-                            focusedLabelColor = MaterialTheme.colorScheme.background,
-                            containerColor = MaterialTheme.colorScheme.background,
-                            focusedIndicatorColor = MaterialTheme.colorScheme.onBackground,
-                            unfocusedIndicatorColor = MaterialTheme.colorScheme.onBackground,
-                            cursorColor = MaterialTheme.colorScheme.onBackground,
-                            textColor = MaterialTheme.colorScheme.onBackground,
-                        )
-                    )
-                    ExposedDropdownMenuBox(
-                        expanded = expanded,
-                        onExpandedChange = {
-                            expanded = !expanded
-                        }
-                    ) {
-                        Row(modifier = Modifier.menuAnchor()) {
-                            Text("ft", style = MaterialTheme.typography.labelSmall)
-                            ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-                        }
-
-                        ExposedDropdownMenu(
-                            expanded = expanded,
-                            onDismissRequest = { expanded = false }
-                        ) {
-                            meters.forEach { item ->
-                                DropdownMenuItem(
-                                    text = { Text(text = item) },
-                                    onClick = {
-                                        selectedText = item
-                                        expanded = false
-                                        Toast.makeText(context, item, Toast.LENGTH_SHORT).show()
-                                    }
-                                )
-                            }
-                        }
-                    }
-                }
-                Spacer(modifier = Modifier.height(16.dp))
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    FnButton(
-                        text = "AC",
-                        position = Position(top = true, first = true),
-                        showPrimaryColor = false,
-                        size = 2.0
-                    )
-                    FnButton(
-                        text = "switch",
-                        showPrimaryColor = false,
-                        position = Position(top = true, last = true),
-                        size = 2.0
-                    )
-                }
-                Spacer(modifier = Modifier.height(4.dp))
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    NbButton(text = "7", position = Position(first = true), size = (4.0).div(3))
-                    NbButton(text = "8", size = (4.0).div(3))
-                    NbButton(text = "9", size = (4.0).div(3), position = Position(last = true))
-                }
-                Spacer(modifier = Modifier.height(4.dp))
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    NbButton(text = "4", position = Position(first = true), size = (4.0).div(3))
-                    NbButton(text = "5", size = (4.0).div(3))
-                    NbButton(text = "6", size = (4.0).div(3), position = Position(last = true))
-                }
-                Spacer(modifier = Modifier.height(4.dp))
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    NbButton(text = "1", position = Position(first = true), size = (4.0).div(3))
-                    NbButton(text = "2", size = (4.0).div(3))
-                    NbButton(text = "3", size = (4.0).div(3), position = Position(last = true))
-                }
-                Spacer(modifier = Modifier.height(4.dp))
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    NbButton(text = ".", position = Position(first = true, bottom = true), size = (4.0).div(3))
-                    NbButton(text = "0", size = (4.0).div(3))
-                    FnButton(
-                        text = "clear",
-                        size = (4.0).div(3),
-                        position = Position(last = true, bottom = true),
-                        showPrimaryColor = false
                     )
                 }
             }
         }
+    }
+    Row(
+        modifier = Modifier
+            .padding(18.dp)
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        TextField(
+            value = "SDS",
+            onValueChange = {},
+            colors = TextFieldDefaults.textFieldColors(
+                unfocusedLabelColor = MaterialTheme.colorScheme.background,
+                focusedLabelColor = MaterialTheme.colorScheme.background,
+                containerColor = MaterialTheme.colorScheme.background,
+                focusedIndicatorColor = MaterialTheme.colorScheme.onBackground,
+                unfocusedIndicatorColor = MaterialTheme.colorScheme.onBackground,
+                cursorColor = MaterialTheme.colorScheme.onBackground,
+                textColor = MaterialTheme.colorScheme.onBackground,
+            )
+        )
+        ExposedDropdownMenuBox(
+            expanded = expanded,
+            onExpandedChange = {
+                expanded = !expanded
+            }
+        ) {
+            Row(modifier = Modifier.menuAnchor()) {
+                Text("ft", style = MaterialTheme.typography.labelSmall)
+                ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
+            }
+
+            ExposedDropdownMenu(
+                expanded = expanded,
+                onDismissRequest = { expanded = false }
+            ) {
+                meters.forEach { item ->
+                    DropdownMenuItem(
+                        text = { Text(text = item) },
+                        onClick = {
+                            selectedText = item
+                            expanded = false
+                            Toast.makeText(context, item, Toast.LENGTH_SHORT).show()
+                        }
+                    )
+                }
+            }
+        }
+    }
+    Row(
+        modifier = Modifier
+            .padding(18.dp)
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        TextField(
+            value = "SDS",
+            onValueChange = {},
+            colors = TextFieldDefaults.textFieldColors(
+                unfocusedLabelColor = MaterialTheme.colorScheme.background,
+                focusedLabelColor = MaterialTheme.colorScheme.background,
+                containerColor = MaterialTheme.colorScheme.background,
+                focusedIndicatorColor = MaterialTheme.colorScheme.onBackground,
+                unfocusedIndicatorColor = MaterialTheme.colorScheme.onBackground,
+                cursorColor = MaterialTheme.colorScheme.onBackground,
+                textColor = MaterialTheme.colorScheme.onBackground,
+            )
+        )
+        ExposedDropdownMenuBox(
+            expanded = expanded,
+            onExpandedChange = {
+                expanded = !expanded
+            }
+        ) {
+            Row(modifier = Modifier.menuAnchor()) {
+                Text("ft", style = MaterialTheme.typography.labelSmall)
+                ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
+            }
+
+            ExposedDropdownMenu(
+                expanded = expanded,
+                onDismissRequest = { expanded = false }
+            ) {
+                meters.forEach { item ->
+                    DropdownMenuItem(
+                        text = { Text(text = item) },
+                        onClick = {
+                            selectedText = item
+                            expanded = false
+                            Toast.makeText(context, item, Toast.LENGTH_SHORT).show()
+                        }
+                    )
+                }
+            }
+        }
+    }
+    Spacer(modifier = Modifier.height(16.dp))
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        FnButton(
+            text = "AC",
+            position = Position(top = true, first = true),
+            showPrimaryColor = false,
+            size = 2.0
+        )
+        FnButton(
+            text = "switch",
+            showPrimaryColor = false,
+            position = Position(top = true, last = true),
+            size = 2.0
+        )
+    }
+    Spacer(modifier = Modifier.height(4.dp))
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        NbButton(text = "7", position = Position(first = true), size = (4.0).div(3))
+        NbButton(text = "8", size = (4.0).div(3))
+        NbButton(text = "9", size = (4.0).div(3), position = Position(last = true))
+    }
+    Spacer(modifier = Modifier.height(4.dp))
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        NbButton(text = "4", position = Position(first = true), size = (4.0).div(3))
+        NbButton(text = "5", size = (4.0).div(3))
+        NbButton(text = "6", size = (4.0).div(3), position = Position(last = true))
+    }
+    Spacer(modifier = Modifier.height(4.dp))
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        NbButton(text = "1", position = Position(first = true), size = (4.0).div(3))
+        NbButton(text = "2", size = (4.0).div(3))
+        NbButton(text = "3", size = (4.0).div(3), position = Position(last = true))
+    }
+    Spacer(modifier = Modifier.height(4.dp))
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        NbButton(text = ".", position = Position(first = true, bottom = true), size = (4.0).div(3))
+        NbButton(text = "0", size = (4.0).div(3))
+        FnButton(
+            text = "clear",
+            size = (4.0).div(3),
+            position = Position(last = true, bottom = true),
+            showPrimaryColor = false
+        )
     }
 }

@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.WindowCompat
 import com.airalpha.kalk.presentation.CalculatorScreen
 import com.airalpha.kalk.presentation.ConverterScreen
+import com.airalpha.kalk.presentation.MainScreen
 import com.airalpha.kalk.ui.theme.KalkTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +24,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             KalkTheme {
                 // A surface container using the 'background' color from the theme
-                ConverterScreen()
+                MainScreen()
             }
         }
     }
