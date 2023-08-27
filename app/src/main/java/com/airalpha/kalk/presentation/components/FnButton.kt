@@ -29,11 +29,12 @@ fun FnButton(
     text: String,
     position: Position = Position(),
     showPrimaryColor: Boolean = true,
-    size: Double = 1.0
+    size: Double = 1.0,
+    onClick: () -> Unit = {}
 ) {
     val screenWidth = LocalConfiguration.current.screenWidthDp.minus(16 * 2)
     Button(
-        onClick = { /*TODO*/ },
+        onClick = onClick,
         colors = ButtonDefaults.buttonColors(
             containerColor = if (showPrimaryColor) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.onBackground.copy(
                 .3f

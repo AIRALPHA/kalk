@@ -24,10 +24,11 @@ fun NbButton(
     text: String,
     position: Position = Position(),
     size: Double = 1.0,
+    onClick: () -> Unit = {}
 ) {
     val screenWidth = LocalConfiguration.current.screenWidthDp.minus(16 * 2)
     Button(
-        onClick = { /*TODO*/ },
+        onClick = onClick,
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.onBackground.copy(.1f),
             contentColor = MaterialTheme.colorScheme.onBackground
