@@ -27,6 +27,7 @@ import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -65,12 +66,14 @@ import com.airalpha.kalk.R
 import com.airalpha.kalk.domain.models.Position
 import com.airalpha.kalk.presentation.components.FnButton
 import com.airalpha.kalk.presentation.components.NbButton
+import com.airalpha.kalk.presentation.components.SelectDimension
+import com.airalpha.kalk.presentation.components.SelectUnit
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ConverterScreen() {
     val context = LocalContext.current
-    val meters = arrayOf("Length", "Other")
+    val meters = arrayOf("Length", "Mass", "Time", "Temperature")
     var expanded by remember { mutableStateOf(false) }
     var selectedText by remember { mutableStateOf(meters[0]) }
 
@@ -81,33 +84,7 @@ fun ConverterScreen() {
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        ExposedDropdownMenuBox(
-            expanded = expanded,
-            onExpandedChange = {
-                expanded = !expanded
-            }
-        ) {
-            Row(modifier = Modifier.menuAnchor()) {
-                Text(selectedText, style = MaterialTheme.typography.labelSmall)
-                ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-            }
-
-            ExposedDropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false }
-            ) {
-                meters.forEach { item ->
-                    DropdownMenuItem(
-                        text = { Text(text = item) },
-                        onClick = {
-                            selectedText = item
-                            expanded = false
-                            Toast.makeText(context, item, Toast.LENGTH_SHORT).show()
-                        }
-                    )
-                }
-            }
-        }
+        SelectDimension()
     }
     Row(
         modifier = Modifier
@@ -129,33 +106,7 @@ fun ConverterScreen() {
                 textColor = MaterialTheme.colorScheme.onBackground,
             )
         )
-        ExposedDropdownMenuBox(
-            expanded = expanded,
-            onExpandedChange = {
-                expanded = !expanded
-            }
-        ) {
-            Row(modifier = Modifier.menuAnchor()) {
-                Text("ft", style = MaterialTheme.typography.labelSmall)
-                ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-            }
-
-            ExposedDropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false }
-            ) {
-                meters.forEach { item ->
-                    DropdownMenuItem(
-                        text = { Text(text = item) },
-                        onClick = {
-                            selectedText = item
-                            expanded = false
-                            Toast.makeText(context, item, Toast.LENGTH_SHORT).show()
-                        }
-                    )
-                }
-            }
-        }
+       SelectUnit()
     }
     Row(
         modifier = Modifier
@@ -164,6 +115,7 @@ fun ConverterScreen() {
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
+        Divider(Modifier.border(BorderStroke(2.dp, Color.White)), thickness = 2.dp, Color.White)
         TextField(
             value = "SDS",
             onValueChange = {},
@@ -177,33 +129,7 @@ fun ConverterScreen() {
                 textColor = MaterialTheme.colorScheme.onBackground,
             )
         )
-        ExposedDropdownMenuBox(
-            expanded = expanded,
-            onExpandedChange = {
-                expanded = !expanded
-            }
-        ) {
-            Row(modifier = Modifier.menuAnchor()) {
-                Text("ft", style = MaterialTheme.typography.labelSmall)
-                ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-            }
-
-            ExposedDropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false }
-            ) {
-                meters.forEach { item ->
-                    DropdownMenuItem(
-                        text = { Text(text = item) },
-                        onClick = {
-                            selectedText = item
-                            expanded = false
-                            Toast.makeText(context, item, Toast.LENGTH_SHORT).show()
-                        }
-                    )
-                }
-            }
-        }
+        SelectUnit()
     }
     Spacer(modifier = Modifier.height(16.dp))
     Row(
